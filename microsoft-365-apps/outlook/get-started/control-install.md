@@ -165,8 +165,10 @@ Disabling the policy:
 Enabling the policy:   
 
 ```console
+
  [HKEY_CURRENT_USER\Software\Policies\Microsoft\office\16.0\outlook\preferences] 
  “NewOutlookMigrationUserSetting”: dword:00000001
+
 ```
 
 Later, this policy will also be available via GPO, Cloud Policy and Intune. 
