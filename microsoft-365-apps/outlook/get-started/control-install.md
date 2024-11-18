@@ -133,3 +133,40 @@ Users might acquire the new Outlook app through different flows, as outlined in 
 Mailbox policies are applied to the work or school email account and not at the device or app level. Therefore, to prevent users from using the app with other accounts that aren't their work or school email account, we recommend blocking access to the app (as described in previous sections).
 
 Follow the instructions in [Enable or disable access to the new Outlook for Windows](/exchange/clients-and-mobile-in-exchange-online/outlook-on-the-web/enable-disable-employee-access-new-outlook#enable-or-disable-the-new-outlook-for-windows-for-an-individual-mailbox) for managing mailbox access.
+
+## Opt-out of new Outlook migration 
+
+Starting to roll out in January 2025, users with M365 for Business Standard and Premium licenses, will be toggled from classic Outlook for Windows to new Outlook for Windows. Users will receive in-application notifications prior to being switched and will have the option to op-out of the automatic migration experience from Outlook Options>General. Users who are switched into new Outlook can toggle back to classic Outlook if they choose to. For more details seen [Switch to new Outlook for Windows](https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/manage/admin-controlled-migration-policy?branch=main&branchFallbackFrom=pr-en-us-3663#hide-the-toggle-in-new-outlook-for-windows).
+
+Admins can opt-out users from this experience by disabling the user setting for migration. 
+
+Policy Name: Manage user setting for new Outlook automatic migration 
+
+Possible Values (Boolean): 
+
+- Not set: If you don't configure this policy (default), the user setting for automatic migration is not controlled by the policy, allowing the user to manage it themselves. This user setting for automatic migration is enabled by default. 
+
+- 1: If you enable this policy, the user setting controlling automatic migration is enabled. Automatic migration to the new Outlook app is allowed, and the user cannot change this setting. 
+
+- 0: If you disable this policy, the user setting controlling automatic migration is disabled. Automatic migration to the new Outlook app is not allowed, and the user cannot change this setting.
+
+*Note that this user setting is not available for migration initiated via the 'Admin-Controlled Migration to New Outlook' [policy](https://learn.microsoft.com/en-us/microsoft-365-apps/outlook/manage/admin-controlled-migration-policy?branch=main&branchFallbackFrom=pr-en-us-3663#hide-the-toggle-in-new-outlook-for-windows).*
+
+Setting as a registry value:
+
+Disabling the policy:
+
+```console
+
+ [HKEY_CURRENT_USER\Software\Policies\Microsoft\office\16.0\outlook\preferences] 
+ “NewOutlookMigrationUserSetting”: dword: 00000000
+```
+
+Enabling the policy:   
+
+```console
+ [HKEY_CURRENT_USER\Software\Policies\Microsoft\office\16.0\outlook\preferences] 
+ “NewOutlookMigrationUserSetting”: dword:00000001
+```
+
+Later, this policy will also be available via GPO, Cloud Policy and Intune. 
